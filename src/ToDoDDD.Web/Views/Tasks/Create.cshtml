@@ -22,9 +22,10 @@
 
             <div class="form-group">
                 <label asp-for="Desc" class="control-label"></label>
-                <input asp-for="Desc" class="form-control" />
+                <input asp-for="Desc" class="form-control" rows="5" cols="50" />
                 <span asp-validation-for="Desc" class="text-danger"></span>
             </div>
+
 
 
 
@@ -55,3 +56,13 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<style>
+    .form-control {
+        height: 150px; /* высота поля ввода */
+        font-size: 16px; /* размер шрифта в поле ввода */
+        line-height: 1.5; /* межстрочный интервал в поле ввода */
+        resize: vertical; /* разрешить изменение высоты поля ввода */
+    }
+
+</style>

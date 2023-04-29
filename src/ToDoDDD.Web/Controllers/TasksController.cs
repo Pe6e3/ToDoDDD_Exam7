@@ -14,9 +14,19 @@ namespace ToDoDDD.Web.Controllers
             _uow = uow;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sortBy)
         {
             IEnumerable<Taska> tasks = _uow.TaskRepository.GetIncluded();
+
+            switch (sortBy)
+            {
+                case "Name": tasks = tasks.OrderBy(t => t.TaskName); break;
+                case "Desc": tasks = tasks.OrderBy(t => t.Desc); break;
+                case "Status": tasks = tasks.OrderBy(t => t.Status.StatusName); break;
+                case "Prioritet": tasks = tasks.OrderBy(t => t.Prioritet.PrioritetName); break;
+                case "CreateDate": tasks = tasks.OrderBy(t => t.CreateDate); break;
+
+            }
             return View(tasks);
         }
 

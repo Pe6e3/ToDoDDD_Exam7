@@ -39,8 +39,8 @@ public class TaskRepository : Repository<Taska>
     {
         return _db.Tasks
             .Include(p => p.Status)
-            .Include(p => p.Prioritet)
-            .ToList();
+            .Include(p => p.Prioritet);
+            //.ToList();
     }
     public Taska GetByIdIncluded(Guid id)
     {
