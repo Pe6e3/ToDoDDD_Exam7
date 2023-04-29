@@ -14,4 +14,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ToDoDDD.BLL\ToDoDDD.BLL.csproj" />
+    <ProjectReference Include="..\ToDoDDD.DLL\ToDoDDD.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -7,9 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Datas\" />
-    <Folder Include="Entities\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
