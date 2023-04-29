@@ -29,12 +29,11 @@
 
 
             <div class="form-group">
-                <label asp-for="StatusId" class="control-label"></label>
                 <input asp-for="StatusId" type="hidden" value="@ViewBag.StatusNew" />
             </div>
 
             <div class="form-group">
-                <label asp-for="PrioritetId" class="control-label"></label>
+                <label asp-for="Prioritet" class="control-label"></label>
                 <select asp-for="PrioritetId" class="form-select" asp-items="ViewBag.Prioritetes">
                     <option>Выберите приоритет</option>
                 </select>

@@ -24,7 +24,7 @@ namespace ToDoDDD.Web.Controllers
         public IActionResult Create()
         {
             List<Status> Statuses = _uow.StatusRepository.Get().ToList();
-            ViewBag.StatusNew = Statuses.FirstOrDefault(s => s.StatusName == "Новая");
+            ViewBag.StatusNew = Statuses.FirstOrDefault(s => s.StatusName == "Новая").Id;
             List<Prioritet> Prioritets = _uow.PrioritetRepository.Get().ToList();
             ViewBag.Prioritetes = new SelectList(Prioritets, "Id", "PrioritetName");
 
