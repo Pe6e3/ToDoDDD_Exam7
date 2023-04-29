@@ -1,16 +1,17 @@
 ﻿@model ToDoDDD.DAL.Entities.Taska
 
+
 @{
-    ViewData["Title"] = "Подробно";
+    ViewData["Title"] = "Удалить";
 }
 
-<h1>Подробно</h1>
+<h1>Удалить</h1>
 
+<h3>Уверен?</h3>
 <div>
-    <h4>Задача</h4>
     <hr />
     <dl class="row">
-  
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TaskName)
         </dt>
@@ -23,7 +24,7 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Desc)
         </dd>
-      
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Status)
         </dt>
@@ -46,9 +47,12 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreateDate)
         </dd>
-        
+
     </dl>
-</div>
-<div>
-    <a asp-action="Index">Вернуться к списку задач</a>
+
+    <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Вернутьс к списку задач</a>
+    </form>
 </div>
