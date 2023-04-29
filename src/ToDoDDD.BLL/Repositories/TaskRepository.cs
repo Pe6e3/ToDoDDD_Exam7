@@ -22,7 +22,7 @@ public class TaskRepository : Repository<Taska>
         Taska? myTask = GetById(id);
         myTask.StatusId = open;
         Update(myTask);
-        Save(myTask);
+        Save();
     }
 
 

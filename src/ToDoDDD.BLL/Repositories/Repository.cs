@@ -40,8 +40,13 @@ public class Repository<T> : IRepository<T> where T : class
         _db.Entry(entity).State = EntityState.Modified;
     }
 
-    public void Save(T entity)
+    public void Save()
     {
         _db.SaveChanges();
+    }
+
+    public void Insert(T entity)
+    {
+        dbSet.Add(entity);
     }
 }

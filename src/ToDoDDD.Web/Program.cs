@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ToDoDDD.BLL.uow;
 using ToDoDDD.DAL.Datas;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AppDbContext")));
+builder.Services.AddScoped<UnitOfWork>();
 
 var app = builder.Build();
 
