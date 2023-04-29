@@ -13,11 +13,9 @@ namespace ToDoDDD.Web.Controllers
             _uow = uow;
         }
 
-
-
         public IActionResult Index()
         {
-            IEnumerable<Taska> tasks = _uow.TaskRepository.Get();
+            IEnumerable<Taska> tasks = _uow.TaskRepository.GetIncluded();
             return View(tasks);
         }
 
@@ -25,8 +23,7 @@ namespace ToDoDDD.Web.Controllers
         public IActionResult Create()
         {
             List<Status> Statuses = _uow.StatusRepository.Get().ToList();
-            ViewBag.Statuses = new SelectList(Statuses, "Id", "StatusName");
-
+            ViewBag.StatusNew = Statuses.FirstOrDefault(s => s.StatusName == "Новая");
             List<Prioritet> Prioritets = _uow.PrioritetRepository.Get().ToList();
             ViewBag.Prioritetes = new SelectList(Prioritets, "Id", "PrioritetName");
 
@@ -40,5 +37,11 @@ namespace ToDoDDD.Web.Controllers
             _uow.TaskRepository.Save();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Details(Guid id)
+        {
+            return View(_uow.TaskRepository.GetByIdIncluded(id));
+        }
+
     }
 }

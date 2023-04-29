@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace ToDoDDD.BLL.Repositories;
 
 public class TaskRepository : Repository<Taska>
 {
+
     private readonly AppDbContext _db;
     public TaskRepository(AppDbContext db) : base(db)
     {
@@ -24,6 +26,22 @@ public class TaskRepository : Repository<Taska>
         Update(myTask);
         Save();
     }
+
+    public IEnumerable<Taska> GetIncluded()
+    {
+        return _db.Tasks
+            .Include(p => p.Status)
+            .Include(p => p.Prioritet)
+            .ToList();
+    }
+    public Taska GetByIdIncluded(Guid id)
+    {
+        return _db.Tasks
+            .Include(p => p.Prioritet)
+            .Include(p => p.Status)
+            .FirstOrDefault(t => t.Id == id);
+    }
+
 
 
 
