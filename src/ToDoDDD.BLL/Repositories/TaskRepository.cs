@@ -18,14 +18,22 @@ public class TaskRepository : Repository<Taska>
         _db = db;
     }
 
-    public void ChangeStatus(Guid id, string statusName) 
+    public void ChangeStatus(Guid id)
     {
-        Guid open = _db.Statuses.FirstOrDefault(s => s.StatusName == statusName).Id;
-        Taska? myTask = GetById(id);
-        myTask.StatusId = open;
+        Guid openStatus = _db.Statuses.FirstOrDefault(s => s.StatusName == "Открыта")!.Id;
+        Guid closeStatus = _db.Statuses.FirstOrDefault(s => s.StatusName == "Закрыта")!.Id;
+        Guid newStatus = _db.Statuses.FirstOrDefault(s => s.StatusName == "Новая")!.Id;
+
+        Taska? myTask = GetByIdIncluded(id);
+
+        myTask.StatusId = myTask.StatusId == newStatus ? openStatus : closeStatus;
+
         Update(myTask);
         Save();
     }
+
+
+
 
     public IEnumerable<Taska> GetIncluded()
     {
@@ -41,7 +49,6 @@ public class TaskRepository : Repository<Taska>
             .Include(p => p.Status)
             .FirstOrDefault(t => t.Id == id);
     }
-
 
 
 
