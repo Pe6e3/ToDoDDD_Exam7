@@ -11,12 +11,12 @@ public class Taska : BaseEntity
     public string Desc { get; set; } = null!;
 
     [Display(Name = "Приоритет")]
-    public Guid PrioritetGuid { get; set; }
+    public Guid PrioritetId { get; set; }
     public virtual Prioritet? prioritet { get; set; }
 
 
     [Display(Name = "Статус")]
-    public Guid StatusGuid { get; set; }
+    public Guid StatusId { get; set; }
     public virtual Status? status { get; set; }
 
     [Display(Name = "Создана")]

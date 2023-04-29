@@ -3,7 +3,7 @@
 public interface IRepository<T> where T : class
 {
     IEnumerable<T> Get();
-    T GetByGuid(Guid guid);
+    T GetById(Guid id);
     void Delete(T entity);
     void Update(T entity);
 

@@ -25,17 +25,23 @@ public class Repository<T> : IRepository<T> where T : class
 
     public IEnumerable<T> Get()
     {
-        throw new NotImplementedException();
+        return dbSet.ToList();
     }
 
-    public T GetByGuid(Guid guid)
+
+    public T GetById(Guid id)
     {
-        throw new NotImplementedException();
+        return dbSet.Find(id);
     }
 
     public void Update(T entity)
     {
         dbSet.Attach(entity);
         _db.Entry(entity).State = EntityState.Modified;
+    }
+
+    public void Save(T entity)
+    {
+        _db.SaveChanges();
     }
 }
