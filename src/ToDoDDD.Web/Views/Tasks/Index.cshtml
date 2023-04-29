@@ -1,18 +1,91 @@
 ﻿@using ToDoDDD.DAL.Entities;
 @model IEnumerable<Taska>
 
-    <a asp-action="Create">Создать</a>
-    <h2> Задачи</h2>
+<a asp-action="Create">Создать</a>
+<h2> Задачи</h2>
 
 <table style="border-collapse: collapse; border: 1px solid black; border-radius: 10px;">
     <tr style="border: 1px solid black;">
-        <th style="padding: 10px; border: 1px solid black;"> <a asp-action="Index" asp-route-sortBy="Name">Название</a> </th>
-        <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="Desc">Описание</a> </th>
-        <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="Status">Статус</a></th>
-        <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="Prioritet">Приоритет</a></th>
-        <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="CreateDate">Дата создания</a></th>
-        <th> Действия </th>
-        
+
+        @if (ViewBag.Sorting == "NameUp")
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="NameUp">Название ^ </a> </th>
+        }
+        else if (ViewBag.Sorting == "NameDown")
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="NameDown">Название v</a> </th>
+        }
+        else
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="NameUp">Название</a> </th>
+        }
+
+
+
+        @if (ViewBag.Sorting == "DescUp")
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="DescUp">Описание ^</a> </th>
+        }
+        else if (ViewBag.Sorting == "DescDown")
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="DescDown">Описание v</a> </th>
+        }
+        else
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="DescUp">Описание</a> </th>
+        }
+
+
+
+
+
+
+        @if (ViewBag.Sorting == "StatusUp")
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="StatusUp">Статус ^</a></th>
+        }
+        else if (ViewBag.Sorting == "StatusDown")
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="StatusDown">Статус v</a></th>
+        }
+        else
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="StatusUp">Статус</a></th>
+        }
+
+
+
+        @if (ViewBag.Sorting == "PrioritetUp")
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="PrioritetUp">Приоритет ^</a></th>
+        }
+        else if (ViewBag.Sorting == "PrioritetDown")
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="PrioritetDown">Приоритет v</a></th>
+        }
+        else
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="PrioritetUp">Приоритет</a></th>
+        }
+
+
+
+        @if (ViewBag.Sorting == "DateUp")
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="DateUp">Дата создания ^</a></th>
+        }
+        else if (ViewBag.Sorting == "DateDown")
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="DateDown">Дата создания v</a></th>
+        }
+        else
+        {
+            <th style="padding: 10px; border: 1px solid black;"><a asp-action="Index" asp-route-sortBy="DateUp">Дата создания</a></th>
+        }
+
+
+        <th style="padding: 10px; border: 1px solid black;width:300px">Действия</a></th>
+
     </tr>
     @foreach (Taska task in Model)
     {
@@ -22,6 +95,7 @@
             <td style="padding: 10px; border: 1px solid black;">@task.Status.StatusName </td>
             <td style="padding: 10px; border: 1px solid black;">@task.Prioritet.PrioritetName </td>
             <td style="padding: 10px; border: 1px solid black;">@task.CreateDate </td>
+
             @*Действия*@
             <td>
                 @if (task.Status.StatusName == "Новая")
@@ -45,3 +119,23 @@
         </tr>
     }
 </table>
+
+                    <style>
+                        tr a{
+                            text-decoration:none;
+                            color:brown;
+                            font-weight:bold;
+                            font-size:22px;
+                            text-align:center;
+
+                        }
+                        th {
+                            text-align:center;
+                            background-color:antiquewhite;
+                            width: 200px;
+                            }
+                            td{
+        text-align: center;
+    }
+                        }
+                    </style>

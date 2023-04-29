@@ -17,20 +17,26 @@ namespace ToDoDDD.Web.Controllers
         public IActionResult Index(string sortBy)
         {
             IEnumerable<Taska> tasks = _uow.TaskRepository.GetIncluded();
-
+            
             switch (sortBy)
             {
-                case "Name": tasks = tasks.OrderBy(t => t.TaskName); break;
-                case "Desc": tasks = tasks.OrderBy(t => t.Desc); break;
-                case "Status": tasks = tasks.OrderBy(t => t.Status.StatusName); break;
-                case "Prioritet": tasks = tasks.OrderBy(t => t.Prioritet.PrioritetName); break;
-                case "CreateDate": tasks = tasks.OrderBy(t => t.CreateDate); break;
+                case "NameUp": tasks = tasks.OrderBy(t => t.TaskName); ViewBag.Sorting = "NameDown"; break;
+                case "DescUp": tasks = tasks.OrderBy(t => t.Desc); ViewBag.Sorting = "DescDown"; break;
+                case "StatusUp": tasks = tasks.OrderBy(t => t.Status.StatusName);  ViewBag.Sorting = "StatusDown"; break;
+                case "PrioritetUp": tasks = tasks.OrderBy(t => t.Prioritet.PrioritetName);  ViewBag.Sorting = "PrioritetDown"; break;
+                case "DateUp": tasks = tasks.OrderBy(t => t.CreateDate);  ViewBag.Sorting = "DateDown"; break;
 
+                case "NameDown": tasks = tasks.OrderByDescending(t => t.TaskName); ViewBag.Sorting = "NameUp"; break;
+                case "DescDown": tasks = tasks.OrderByDescending(t => t.Desc); ViewBag.Sorting = "DescUp"; break;
+                case "StatusDown": tasks = tasks.OrderByDescending(t => t.Status.StatusName); ViewBag.Sorting = "StatusUp"; break;
+                case "PrioritetDown": tasks = tasks.OrderByDescending(t => t.Prioritet.PrioritetName); ViewBag.Sorting = "PrioritetUp"; break;
+                case "DateDown": tasks = tasks.OrderByDescending(t => t.CreateDate); ViewBag.Sorting = "DateUp"; break;
             }
+
             return View(tasks);
         }
 
-
+            
         public IActionResult Create()
         {
             List<Status> Statuses = _uow.StatusRepository.Get().ToList();
