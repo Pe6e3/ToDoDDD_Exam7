@@ -14,10 +14,11 @@ namespace ToDoDDD.Web.Controllers
             _uow = uow;
         }
 
-        public IActionResult Index(string sortBy)
+        public IActionResult Index(string sortBy, string FilterName)
         {
             IEnumerable<Taska> tasks = _uow.TaskRepository.GetIncluded();
             
+
             switch (sortBy)
             {
                 case "NameUp": tasks = tasks.OrderBy(t => t.TaskName); ViewBag.Sorting = "NameDown"; break;
@@ -31,6 +32,11 @@ namespace ToDoDDD.Web.Controllers
                 case "StatusDown": tasks = tasks.OrderByDescending(t => t.Status.StatusName); ViewBag.Sorting = "StatusUp"; break;
                 case "PrioritetDown": tasks = tasks.OrderByDescending(t => t.Prioritet.PrioritetName); ViewBag.Sorting = "PrioritetUp"; break;
                 case "DateDown": tasks = tasks.OrderByDescending(t => t.CreateDate); ViewBag.Sorting = "DateUp"; break;
+            }
+
+            if (FilterName != null)
+            {
+                tasks = tasks.Where(t => t.TaskName==FilterName);
             }
 
             return View(tasks);

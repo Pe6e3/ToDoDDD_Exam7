@@ -4,6 +4,17 @@
 <a asp-action="Create">Создать</a>
 <h2> Задачи</h2>
 
+
+<form asp-action="Index">
+    <div class="form-group">
+        <label class="control-label">Фильтр по названию задачи</label>
+        <input name="FilterName" class="form-control" />
+        <input type="submit" value="Отфильтровать" />
+    </div>
+</form>
+
+<hr />
+
 <table style="border-collapse: collapse; border: 1px solid black; border-radius: 10px;">
     <tr style="border: 1px solid black;">
 
